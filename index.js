@@ -5,7 +5,7 @@ function createBot() {
         host: 'breakpointsmp.falix.gg',
         port: 58392,
         username: 'FlixUpTimeBot',
-        version: '1.21.11'
+        version: '1.21.1'
     });
 
     // Бот прыгает каждые 5 секунд, и сервер не кикает его за АФК
