@@ -8,6 +8,15 @@ function createBot() {
         version: '1.21.11'
     });
 
+    // Бот прыгает каждые 5 секунд, и сервер не кикает его за АФК
+    bot.on('spawn', () => {
+        console.log('Бот успешно зашел на спавн!');
+        setInterval(() => {
+            bot.setControlState('jump', true);
+            setTimeout(() => bot.setControlState('jump', false), 500);
+        }, 5000);
+    });
+
     bot.on('kick', (reason) => console.log(`Кикнули: ${reason}`));
     bot.on('error', (err) => console.log(`Ошибка: ${err}`));
     
