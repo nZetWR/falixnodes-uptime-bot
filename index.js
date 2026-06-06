@@ -6,27 +6,29 @@ function createBot() {
         port: 58392,
         username: 'FlixUpTimeBot',
         version: '1.21.1',
-        hideErrors: true,
-        respawn: true
-    });
-
-    bot.on('login', () => {
-        bot.setControlState('sneak', true);
+        checkTimeoutInterval: 60000,
+        hideErrors: true
     });
 
     bot.on('spawn', () => {
-        bot.setControlState('sneak', false);
+        console.log('Бот успешно зашел!');
+        // Прыгаем реже (раз в 15 секунд), чтобы сервер не считал это спамом пакетов
         setInterval(() => {
-            bot.setControlState('jump', true);
-            setTimeout(() => bot.setControlState('jump', false), 400);
-        }, 4000);
+            if (bot && bot.entity) {
+                bot.setControlState('jump', true);
+                setTimeout(() => {
+                    if (bot && bot.entity) bot.setControlState('jump', false);
+                }, 400);
+            }
+        }, 15000);
     });
 
     bot.on('kick', (reason) => console.log(`Кикнули: ${reason}`));
     bot.on('error', (err) => console.log(`Ошибка: ${err.message}`));
     
     bot.on('end', () => {
-        setTimeout(createBot, 5000);
+        // Ждем целых 30 секунд перед перезаходом, чтобы сервер успел "забыть" старое соединение
+        setTimeout(createBot, 30000);
     });
 }
 
