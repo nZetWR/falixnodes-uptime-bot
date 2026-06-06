@@ -5,7 +5,7 @@ function createBot() {
         host: 'breakpointsmp.falix.gg',
         port: 58392,
         username: 'FlixUpTimeBot',
-        version: '1.21.1'
+        version: '1.21.11'
     });
 
     bot.on('kick', (reason) => console.log(`Кикнули: ${reason}`));
