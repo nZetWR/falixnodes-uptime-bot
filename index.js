@@ -1,4 +1,3 @@
-index.js
 const mineflayer = require('mineflayer');
 
 function createBot() {
