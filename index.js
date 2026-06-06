@@ -10,10 +10,11 @@ function createBot() {
         hideErrors: true
     });
 
+    const seconds = [3, 5.3, 8.9, 11, 3.8, 7, 2];
+
     function doRandomAction() {
         if (bot && bot.entity) {
-            const actionType = Math.random();
-            if (actionType < 0.5) {
+            if (Math.random() < 0.5) {
                 bot.swingArm('right');
             } else {
                 bot.setControlState('sneak', true);
@@ -22,13 +23,13 @@ function createBot() {
                 }, 300);
             }
         }
-        const randomTime = Math.floor(Math.random() * (25000 - 8000 + 1)) + 8000;
-        setTimeout(doRandomAction, randomTime);
+        const nextSeconds = seconds[Math.floor(Math.random() * seconds.length)];
+        setTimeout(doRandomAction, nextSeconds * 1000);
     }
 
     bot.on('spawn', () => {
         console.log('OK');
-        setTimeout(doRandomAction, 5000);
+        setTimeout(doRandomAction, 3000);
     });
 
     bot.on('kick', (reason) => console.log(reason));
